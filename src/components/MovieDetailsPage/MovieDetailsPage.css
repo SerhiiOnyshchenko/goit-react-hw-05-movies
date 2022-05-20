@@ -1,0 +1,11 @@
+.movie {
+	display: flex;
+}
+.Info {
+	padding: 20px;
+}
+.title {
+	font-size: 30px;
+	font-weight: 700;
+	margin: 10px 0;
+}
