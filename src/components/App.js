@@ -1,8 +1,8 @@
 import { Route, Routes } from 'react-router-dom';
 import HomePage from './HomePage/HomePage';
-import Cast from './MovieDetailsPage/Cast/Cast';
+// import Cast from './MovieDetailsPage/Cast/Cast';
 import MovieDetailsPage from './MovieDetailsPage/MovieDetailsPage';
-import Reviews from './MovieDetailsPage/Reviews/Reviews';
+// import Reviews from './MovieDetailsPage/Reviews/Reviews';
 import MoviesPage from './MoviesPage/MoviesPage';
 import Container from './Container/Container';
 import AppBar from './AppBar/AppBar';
