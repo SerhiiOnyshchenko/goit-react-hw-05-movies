@@ -10,12 +10,17 @@ import defaultImg from '../../images/default-movie.png';
 export default function MovieDetailsPage() {
    const { movieId } = useParams();
    const [movie, setMovie] = useState(null);
+   const [error, setError] = useState(null);
+
    useEffect(() => {
-      fetchMovieDetailsById(movieId).then(setMovie);
+      fetchMovieDetailsById(movieId)
+         .then(setMovie)
+         .catch(error => setError(error));
    }, [movieId]);
+
    return (
       <div>
-         {movie ? (
+         {movie && (
             <div>
                <div className={s.movie}>
                   <img
@@ -55,9 +60,8 @@ export default function MovieDetailsPage() {
                </nav>
                <hr />
             </div>
-         ) : (
-            <NotFound />
          )}
+         {error && <NotFound />}
          <Suspense fallback={<Loader />}>
             <Outlet />
          </Suspense>
