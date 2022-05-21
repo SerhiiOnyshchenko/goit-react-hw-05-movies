@@ -1,10 +1,10 @@
 import { fetchTrending } from '../../services/movies-api';
 import { useState, useEffect } from 'react';
-import Loader from './../Loader/Loader';
-import Button from './../Button/Button';
-import Scrollup from './../Scrollup/Scrollup';
+import Loader from '../../components/Loader/Loader';
+import Button from '../../components/Button/Button';
+import Scrollup from '../../components/Scrollup/Scrollup';
+import MoviesGallery from '../../components/MoviesGallery/MoviesGallery';
 import * as Scroll from 'react-scroll';
-import MoviesGallery from './../MoviesGallery/MoviesGallery';
 import s from './HomePage.module.css';
 
 export default function HomePage() {

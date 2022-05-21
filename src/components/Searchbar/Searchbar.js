@@ -14,8 +14,6 @@ export default function Searchbar({ onSubmit }) {
    return (
       <div className={s.Searchbar}>
          <form className={s.SearchForm} onSubmit={onFormSubmit}>
-            <button type="submit" className={s.SearchFormButton}></button>
-            <label className={s.SearchFormButtonLabel}></label>
             <input
                className={s.SearchFormInput}
                type="text"

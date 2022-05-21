@@ -2,7 +2,6 @@
    "name": "goit-react-hw-05-movies",
    "version": "0.1.0",
    "private": true,
-   "homepage": "https://serhiionyshchenko.github.io/goit-react-hw-05-movies/",
    "dependencies": {
       "@testing-library/jest-dom": "^5.16.3",
       "@testing-library/react": "^12.1.4",
@@ -20,7 +19,8 @@
    "scripts": {
       "start": "react-scripts start",
       "build": "react-scripts build",
-      "deploy": "netlify deploy",
+      "predeploy": "npm run build",
+      "deploy": "netlify deploy -p",
       "test": "react-scripts test",
       "eject": "react-scripts eject",
       "lint:js": "eslint src/**/*.{js,jsx}"

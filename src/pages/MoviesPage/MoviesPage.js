@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { fetchSearchMovie } from '../../services/movies-api';
-import Searchbar from './../Searchbar/Searchbar';
-import Loader from './../Loader/Loader';
-import Button from './../Button/Button';
-import Scrollup from './../Scrollup/Scrollup';
-import MoviesGallery from './../MoviesGallery/MoviesGallery';
+import Loader from '../../components/Loader/Loader';
+import Button from '../../components/Button/Button';
+import Scrollup from '../../components/Scrollup/Scrollup';
+import MoviesGallery from '../../components/MoviesGallery/MoviesGallery';
+import Searchbar from '../../components/Searchbar/Searchbar';
 import * as Scroll from 'react-scroll';
 import Notiflix from 'notiflix';
 import { useLocation, useNavigate } from 'react-router-dom';

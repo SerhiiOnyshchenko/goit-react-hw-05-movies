@@ -3,8 +3,8 @@ import { URL_IMG, fetchMovieDetailsById } from '../../services/movies-api';
 import { useState, useEffect } from 'react';
 import { useParams, Outlet, NavLink } from 'react-router-dom';
 import s from './MovieDetailsPage.module.css';
-import Loader from './../Loader/Loader';
-import NotFound from 'components/NotFound/NotFound';
+import Loader from '../../components/Loader/Loader';
+import NotFound from '../NotFound/NotFound';
 import defaultImg from '../../images/default-movie.png';
 
 export default function MovieDetailsPage() {
