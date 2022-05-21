@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { fetchSearchMovie } from '../../services/themoviedb';
+import { fetchSearchMovie } from '../../services/movies-api';
 import Searchbar from './../Searchbar/Searchbar';
 import Loader from './../Loader/Loader';
 import Button from './../Button/Button';
@@ -7,13 +7,29 @@ import Scrollup from './../Scrollup/Scrollup';
 import MoviesGallery from './../MoviesGallery/MoviesGallery';
 import * as Scroll from 'react-scroll';
 import Notiflix from 'notiflix';
+import { useLocation, useNavigate } from 'react-router-dom';
+
+Notiflix.Notify.init({
+   position: 'left-top',
+});
 
 export default function MoviesPage() {
-   const [searchName, setSearchName] = useState('');
+   const history = useNavigate();
+   const location = useLocation();
+   const [searchName, setSearchName] = useState(location.state ?? '');
    const [countPage, setCountPage] = useState(1);
    const [moviesList, setMoviesList] = useState([]);
    const [showLoadMore, setShowLoadMore] = useState(false);
    const [loading, setLoading] = useState(false);
+
+   useEffect(() => {
+      if (!location.state) {
+         setShowLoadMore(false);
+      }
+      setSearchName(location.state);
+      setCountPage(1);
+      setMoviesList([]);
+   }, [location.state]);
 
    useEffect(() => {
       if (!searchName) {
@@ -23,9 +39,18 @@ export default function MoviesPage() {
       setLoading(true);
       fetchSearchMovie(searchName, countPage)
          .then(date => {
-            setMoviesList(prev => [...prev, ...date.results]);
+            setMoviesList(prev => {
+               const filterRes = date.results.filter(({ id }) => {
+                  for (const movie of prev) {
+                     if (id === movie.id) {
+                        return false;
+                     }
+                  }
+                  return true;
+               });
+               return [...prev, ...filterRes];
+            });
             setLoading(false);
-            console.log(date);
             if (date.total_results !== date.results.length) {
                setShowLoadMore(true);
             }
@@ -43,7 +68,7 @@ export default function MoviesPage() {
          })
          .catch(onApiError);
    }, [countPage, searchName]);
-   console.log(moviesList);
+
    const onApiError = () => {
       Notiflix.Notify.failure(
          'Sorry, there are no movies matching your search query. Please try again.'
@@ -60,10 +85,12 @@ export default function MoviesPage() {
       if (searchName === name && countPage === 1) {
          return;
       }
+      history({ ...location, search: `query=${name}` }, { state: name });
       setSearchName(name);
       setCountPage(1);
       setMoviesList([]);
    };
+
    const onloadeMore = () => {
       setCountPage(prev => prev + 1);
       scrollSlowly();

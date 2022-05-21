@@ -1,8 +1,9 @@
 import React from 'react';
-import { URL_IMG } from '../../services/themoviedb';
+import { URL_IMG } from '../../services/movies-api';
 import { Link } from 'react-router-dom';
 import s from './MoviesGallery.module.css';
-import gefaultImg from '../../images/default-movie.png';
+import defaultImg from '../../images/default-movie.png';
+import PropTypes from 'prop-types';
 
 export default function MoviesGallery({ moviesList }) {
    return (
@@ -12,7 +13,7 @@ export default function MoviesGallery({ moviesList }) {
                <Link to={`/movies/${id}`} className={s.Link}>
                   <img
                      className={s.Img}
-                     src={poster_path ? URL_IMG + poster_path : gefaultImg}
+                     src={poster_path ? URL_IMG + poster_path : defaultImg}
                      alt={title || name}
                   />
                   <p className={s.title}>{title || name}</p>
@@ -22,3 +23,14 @@ export default function MoviesGallery({ moviesList }) {
       </ul>
    );
 }
+
+MoviesGallery.propTypes = {
+   moviesList: PropTypes.arrayOf(
+      PropTypes.shape({
+         id: PropTypes.number.isRequired,
+         title: PropTypes.string,
+         name: PropTypes.string,
+         poster_path: PropTypes.string,
+      })
+   ),
+};

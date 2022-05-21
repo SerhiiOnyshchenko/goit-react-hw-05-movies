@@ -1,43 +1,66 @@
-import React from 'react';
-import { URL_IMG, fetchMovieDetailsById } from '../../services/themoviedb';
+import { Suspense } from 'react';
+import { URL_IMG, fetchMovieDetailsById } from '../../services/movies-api';
 import { useState, useEffect } from 'react';
-import { useParams, Link, useLocation, Outlet } from 'react-router-dom';
-import './MovieDetailsPage.css';
+import { useParams, Outlet, NavLink } from 'react-router-dom';
+import s from './MovieDetailsPage.module.css';
+import Loader from './../Loader/Loader';
+import NotFound from 'components/NotFound/NotFound';
+import defaultImg from '../../images/default-movie.png';
 
 export default function MovieDetailsPage() {
-   const { pathname } = useLocation();
    const { movieId } = useParams();
    const [movie, setMovie] = useState(null);
-
    useEffect(() => {
       fetchMovieDetailsById(movieId).then(setMovie);
    }, [movieId]);
-
    return (
       <div>
-         {movie && (
-            <div className="movie">
-               <img
-                  src={URL_IMG + movie.poster_path}
-                  alt={movie.title || movie.name}
-                  width="300"
-               />
-               <div className="Info">
-                  <h2 className="title">{movie.title || movie.name}</h2>
-                  <p>User Score: {movie.vote_average}</p>
-                  <h3>Overview</h3>
-                  <p>{movie.overview}</p>
-                  <h3>Genres</h3>
-                  <p>{movie.genres.map(genr => genr.name).join(' / ')}</p>
+         {movie ? (
+            <div>
+               <div className={s.movie}>
+                  <img
+                     src={
+                        movie.poster_path
+                           ? URL_IMG + movie.poster_path
+                           : defaultImg
+                     }
+                     alt={movie.title || movie.name}
+                     width="300"
+                  />
+                  <div className={s.Info}>
+                     <h2 className={s.title}>{movie.title || movie.name}</h2>
+                     <p className={s.text}>
+                        <b>Release date:</b> {movie.release_date}
+                     </p>
+                     <p className={s.text}>
+                        <b>User Score:</b> {movie.vote_average}
+                     </p>
+                     <p className={s.text}>
+                        <b>Genres:</b>{' '}
+                        {movie.genres.map(genr => genr.name).join(' / ')}
+                     </p>
+                     <p className={s.text}>
+                        <b>Runtime:</b> {movie.runtime} min.
+                     </p>
+                     <p className={s.text}>
+                        <b>Overview:</b>
+                     </p>
+                     <p className={s.text}>{movie.overview}</p>
+                  </div>
                </div>
+               <hr />
+               <nav className={s.nav}>
+                  <NavLink to="cast">Cast</NavLink>
+                  <NavLink to="reviews">Reviews</NavLink>
+               </nav>
+               <hr />
             </div>
+         ) : (
+            <NotFound />
          )}
-         <hr />
-         <nav>
-            <Link to="cast">Cast</Link>
-            <Link to={`${pathname}/reviews`}>Reviews</Link>
-         </nav>
-         <Outlet />
+         <Suspense fallback={<Loader />}>
+            <Outlet />
+         </Suspense>
       </div>
    );
 }

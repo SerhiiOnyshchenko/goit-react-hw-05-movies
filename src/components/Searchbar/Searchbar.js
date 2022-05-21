@@ -8,10 +8,11 @@ export default function Searchbar({ onSubmit }) {
    const onFormSubmit = e => {
       e.preventDefault();
       onSubmit(value);
+      setValue('');
    };
 
    return (
-      <header className={s.Searchbar}>
+      <div className={s.Searchbar}>
          <form className={s.SearchForm} onSubmit={onFormSubmit}>
             <button type="submit" className={s.SearchFormButton}></button>
             <label className={s.SearchFormButtonLabel}></label>
@@ -25,7 +26,7 @@ export default function Searchbar({ onSubmit }) {
                placeholder="Search movies"
             />
          </form>
-      </header>
+      </div>
    );
 }
 

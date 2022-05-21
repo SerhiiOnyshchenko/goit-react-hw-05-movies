@@ -1,4 +1,4 @@
-import './Scrollup.css';
+import s from './Scrollup.module.css';
 
 export default function Scrollup() {
    //Get the button:
@@ -27,7 +27,7 @@ export default function Scrollup() {
       <button
          id="myBtn"
          type="button"
-         className="Scrollup"
+         className={s.Scrollup}
          onClick={onUp}
       ></button>
    );

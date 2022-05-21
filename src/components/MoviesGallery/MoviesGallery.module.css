@@ -7,11 +7,17 @@
 	padding: 0;
 	list-style: none;
 }
+
 .Item {
 	border-radius: 10px;
 	height: 100%;
 	box-shadow: 0 0 5px 5px rgba(0, 255, 255, 0.568);
 	overflow: hidden;
+	transition: transform 0.5s;
+}
+
+.Item:hover {
+	transform: scale(1.05);
 }
 
 .Link {
@@ -20,14 +26,27 @@
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: center;
+	color: #a8a8a8;
+	font-size: 16px;
+	font-weight: 500;
+	transition: color 0.5s;
 }
+
 .Link:hover {
 	color: aqua;
 }
+
 .Img {
 	width: 100%;
 }
+
 .title {
-	display: block;
+	margin: 0;
+	background: #2b2b2be3;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	text-align: center;
+	width: 100%;
+	min-height: 40px;
 }
