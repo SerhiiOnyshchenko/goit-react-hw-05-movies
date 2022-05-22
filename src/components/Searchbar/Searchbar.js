@@ -1,13 +1,10 @@
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import s from './Searchbar.module.css';
-import { useLocation } from 'react-router-dom';
 
 export default function Searchbar({ onSubmit }) {
-   const { state } = useLocation();
-   const [value, setValue] = useState(
-      window.location.search.split('=')[1] || ''
-   );
+   const state = window.location.search.split('=')[1];
+   const [value, setValue] = useState('');
 
    useEffect(() => {
       if (state) {
@@ -15,7 +12,7 @@ export default function Searchbar({ onSubmit }) {
          return;
       }
       setValue('');
-   }, [state]);
+   }, [onSubmit, state]);
 
    const onFormSubmit = e => {
       e.preventDefault();

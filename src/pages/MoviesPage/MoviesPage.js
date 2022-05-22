@@ -7,7 +7,7 @@ import MoviesGallery from '../../components/MoviesGallery/MoviesGallery';
 import Searchbar from '../../components/Searchbar/Searchbar';
 import * as Scroll from 'react-scroll';
 import Notiflix from 'notiflix';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 Notiflix.Notify.init({
    position: 'left-top',
@@ -16,20 +16,21 @@ Notiflix.Notify.init({
 export default function MoviesPage() {
    const history = useNavigate();
    const location = useLocation();
-   const [searchName, setSearchName] = useState(location.state ?? '');
+   const state = window.location.search.split('=')[1];
+   const [searchName, setSearchName] = useState(state ?? '');
    const [countPage, setCountPage] = useState(1);
    const [moviesList, setMoviesList] = useState([]);
    const [showLoadMore, setShowLoadMore] = useState(false);
    const [loading, setLoading] = useState(false);
 
    useEffect(() => {
-      if (!location.state) {
+      if (!state) {
          setShowLoadMore(false);
       }
-      setSearchName(location.state);
+      setSearchName(state);
       setCountPage(1);
       setMoviesList([]);
-   }, [location.state]);
+   }, [state]);
 
    useEffect(() => {
       if (!searchName) {
@@ -85,7 +86,7 @@ export default function MoviesPage() {
       if (searchName === name && countPage === 1) {
          return;
       }
-      history({ ...location, search: `query=${name}` }, { state: name });
+      history({ ...location, search: `query=${name}` });
       setSearchName(name);
       setCountPage(1);
       setMoviesList([]);
