@@ -10,10 +10,7 @@ export default function MoviesGallery({ moviesList }) {
       <ul id="MoviesGallery" className={s.MovieGrid}>
          {moviesList.map(({ id, title, name, poster_path }) => (
             <li key={id} className={s.Item}>
-               <Link
-                  to={`/goit-react-hw-05-movies/movies/${id}`}
-                  className={s.Link}
-               >
+               <Link to={`/movies/${id}`} className={s.Link}>
                   <img
                      className={s.Img}
                      src={poster_path ? URL_IMG + poster_path : defaultImg}

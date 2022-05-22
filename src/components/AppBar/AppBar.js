@@ -9,7 +9,7 @@ export default function Appbar() {
       if (window.history.state && window.history.state.idx > 0) {
          navigate(-1);
       } else {
-         navigate('/goit-react-hw-05-movies', { replace: true });
+         navigate('/', { replace: true });
       }
    };
 

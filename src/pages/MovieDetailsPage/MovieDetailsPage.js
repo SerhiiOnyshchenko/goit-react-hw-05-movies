@@ -55,8 +55,8 @@ export default function MovieDetailsPage() {
                </div>
                <hr />
                <nav className={s.nav}>
-                  <NavLink to="cast">Cast</NavLink>
-                  <NavLink to="reviews">Reviews</NavLink>
+                  <NavLink to={`/movies/${movieId}/cast`}>Cast</NavLink>
+                  <NavLink to={`/movies/${movieId}/reviews`}>Reviews</NavLink>
                </nav>
                <hr />
             </div>

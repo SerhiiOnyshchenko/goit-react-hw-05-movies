@@ -6,7 +6,7 @@ export default function Navigation() {
    return (
       <nav className={s.nav}>
          <NavLink
-            to="/goit-react-hw-05-movies"
+            to="/"
             className={({ isActive }) =>
                isActive ? `${s.active}` : `${s.inactive}`
             }
@@ -14,7 +14,7 @@ export default function Navigation() {
             Home
          </NavLink>
          <NavLink
-            to="goit-react-hw-05-movies/movies"
+            to="/movies"
             className={({ isActive }) =>
                isActive ? `${s.active}` : `${s.inactive}`
             }

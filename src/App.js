@@ -21,21 +21,14 @@ export default function App() {
          <AppBar />
          <Suspense fallback={<Loader />}>
             <Routes>
-               <Route
-                  path="/goit-react-hw-05-movies"
-                  exact
-                  element={<HomePage />}
-               />
-               <Route
-                  path="goit-react-hw-05-movies/movies"
-                  element={<MoviesPage />}
-               />
-               <Route
-                  path="goit-react-hw-05-movies/movies/:movieId"
-                  element={<MovieDetailsPage />}
-               >
-                  <Route path="cast" element={<Cast />} />
-                  <Route path="reviews" element={<Reviews />} />
+               <Route path="/" exact element={<HomePage />} />
+               <Route path="/movies" element={<MoviesPage />} />
+               <Route path="/movies/:movieId" element={<MovieDetailsPage />}>
+                  <Route path="/movies/:movieId/cast" element={<Cast />} />
+                  <Route
+                     path="/movies/:movieId/reviews"
+                     element={<Reviews />}
+                  />
                </Route>
                <Route path="*" element={<NotFound />} />
             </Routes>
