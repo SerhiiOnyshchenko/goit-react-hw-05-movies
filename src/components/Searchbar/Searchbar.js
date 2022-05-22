@@ -5,7 +5,9 @@ import { useLocation } from 'react-router-dom';
 
 export default function Searchbar({ onSubmit }) {
    const { state } = useLocation();
-   const [value, setValue] = useState('');
+   const [value, setValue] = useState(
+      window.location.search.split('=')[1] || ''
+   );
 
    useEffect(() => {
       if (state) {
