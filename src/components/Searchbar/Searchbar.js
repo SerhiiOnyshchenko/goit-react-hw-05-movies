@@ -12,7 +12,7 @@ export default function Searchbar({ onSubmit }) {
          return;
       }
       setValue('');
-   }, [onSubmit, state]);
+   }, [state]);
 
    const onFormSubmit = e => {
       e.preventDefault();
