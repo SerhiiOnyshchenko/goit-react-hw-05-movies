@@ -1,22 +1,16 @@
 import React from 'react';
 import { URL_IMG } from '../../services/movies-api';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import s from './MoviesGallery.module.css';
 import defaultImg from '../../images/default-movie.png';
 import PropTypes from 'prop-types';
 
 export default function MoviesGallery({ moviesList }) {
-   const location = useLocation();
-   console.log(location);
    return (
       <ul id="MoviesGallery" className={s.MovieGrid}>
          {moviesList.map(({ id, title, name, poster_path }) => (
             <li key={id} className={s.Item}>
-               <Link
-                  to={`/movies/${id}`}
-                  state={{ from: location }}
-                  className={s.Link}
-               >
+               <Link to={`/movies/${id}`} className={s.Link}>
                   <img
                      className={s.Img}
                      src={poster_path ? URL_IMG + poster_path : defaultImg}
