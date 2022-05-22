@@ -8,7 +8,6 @@ export default function Searchbar({ onSubmit }) {
    const onFormSubmit = e => {
       e.preventDefault();
       onSubmit(value);
-      setValue('');
    };
 
    return (
